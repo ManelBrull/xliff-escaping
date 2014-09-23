@@ -15,12 +15,12 @@ public class XLIFFwithHTMLTest {
 				result);
 	}
 	
-	/**@Test
+	@Test
 	public void testHelloWorld() {
 		String toParse = "<source>Hello world</source>";
 		String result = XLIFFwithHTML.parse(toParse);
 		Assert.assertEquals("Empty input equals empty output",
 				toParse,
 				result);
-	}**/
+	}
 }
