@@ -1,15 +1,23 @@
 package com.mabrupi;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.mabrupi.parser.XLIFFwithHTML;
 
 public class XLIFFwithHTMLTest {
 
+	XLIFFwithHTML parser;
+	
+	@Before
+	public void initialize(){
+		parser = new XLIFFwithHTML();
+	}
+	
 	@Test
 	public void testEmpty() {
-		String result = XLIFFwithHTML.parse("");
+		String result = parser.parse("");
 		Assert.assertEquals("Empty input equals empty output",
 				"",
 				result);
@@ -18,7 +26,7 @@ public class XLIFFwithHTMLTest {
 	@Test
 	public void testHelloWorld() {
 		String toParse = "<source>Hello world</source>";
-		String result = XLIFFwithHTML.parse(toParse);
+		String result = parser.parse(toParse);
 		Assert.assertEquals("Single source without tags",
 				toParse,
 				result);
@@ -30,7 +38,7 @@ public class XLIFFwithHTMLTest {
 		String expected  = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>"
 				+ "really>ept id\"1\" rid=\"0\">&lt;/b&gt;</ept>"
 				+ " sure about this.</source>";
-		String result = XLIFFwithHTML.parse(toParse);
+		String result = parser.parse(toParse);
 		Assert.assertEquals("Source with html b tag",
 				expected,
 				result);
