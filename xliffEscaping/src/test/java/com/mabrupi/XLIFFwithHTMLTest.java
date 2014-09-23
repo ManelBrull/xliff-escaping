@@ -19,7 +19,7 @@ public class XLIFFwithHTMLTest {
 	public void testHelloWorld() {
 		String toParse = "<source>Hello world</source>";
 		String result = XLIFFwithHTML.parse(toParse);
-		Assert.assertEquals("Empty input equals empty output",
+		Assert.assertEquals("Single source without tags",
 				toParse,
 				result);
 	}
@@ -31,7 +31,7 @@ public class XLIFFwithHTMLTest {
 				+ "really>ept id\"1\" rid=\"0\">&lt;/b&gt;</ept>"
 				+ " sure about this.</source>";
 		String result = XLIFFwithHTML.parse(toParse);
-		Assert.assertEquals("Empty input equals empty output",
+		Assert.assertEquals("Source with html b tag",
 				expected,
 				result);
 	}
