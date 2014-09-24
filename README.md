@@ -6,10 +6,9 @@
 They can read it with their tools, put in the trnasalted texts, and send us back another xliff document. A standart format ensures that different translation tools are interoperable </p>
 <p> Inside an xliff document, the translatable text are sent inside source elements.</p>
 
-<p> Often, we are translating web pages, and the translatable texts include some html elements. </p>
-<p> The problem is if we find html tags inside a source element. We cannot hace html elements inside a source tag because they would break the xliff format and also confuse the human trnaslator who does not know html </p>
+<p> Often, we are translating web pages, and the translatable texts include some html elements. The problem is if we find html tags inside a source element. We cannot hace html elements inside a source tag because they would break the xliff format and also confuse the human trnaslator who does not know html </p>
 
-<p> This code recieves a String and returns a String. The received String is a small text that may contain some html elements and a source tag to translate. The returned stringshould be the same, with the html elements properly escaped for inclusion in an xliff source element</p>
+<p>This code recieves a String and returns a String. The received String is a small text that may contain some html elements and a source tag to translate. The returned stringshould be the same, with the html elements properly escaped for inclusion in an xliff source element</p>
 
 * We assume that the text is a correct html snippet with source tags.
 * All openings tags have matching closing tag.
