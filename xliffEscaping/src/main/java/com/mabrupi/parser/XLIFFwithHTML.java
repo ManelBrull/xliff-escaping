@@ -84,7 +84,13 @@ public class XLIFFwithHTML {
 	}
 	
 	private String generateOpeningEscapeTag(String nameTag) {
-		return " ";
+		if(nameTag.equals("source")) return "<source>";
+		StringBuffer result = new StringBuffer();
+		result.append("<bpt id=\"").append(String.valueOf(id)).append("\"");
+		id++;
+		result.append(" rid=\"").append(String.valueOf(rid)).append("\">");
+		result.append("&lt;").append(nameTag).append("&gt;</bpt>");
+		return result.toString();
 	}
 	
 	private String getNameClosingTag(String str) {
