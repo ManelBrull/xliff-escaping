@@ -6,4 +6,4 @@
 They can read it with their tools, put in the trnasalted texts, and send us back another xliff document. A standart format ensures
 that different translation tools are interoperable </p>
 <p> Inside an xliff document, the translatable text are sent inside <source> elements. So if we want them to transalte "Hello world", the xliff document will contain: </p>
-> "<source>Hello world\</source>"
+<pre></code> "<source>Hello world\</source>" </code></pre>
