@@ -36,9 +36,11 @@ public class XLIFFwithHTML {
 		if(doRecursion(toEscape)){
 			System.out.println("I do recursion with: " + toEscape);
 			parseBlock(getNestedTag(toEscape));
+			
 		} else {
 			System.out.println("I don't do recursion with: " + toEscape);
-			return createEscapeTags(toEscape);
+			//return createEscapeTags(toEscape);
+			return toEscape;
 		}
 		
 		return toEscape;
@@ -80,19 +82,19 @@ public class XLIFFwithHTML {
 	}
 	
 	private String generateOpeningEscapeTag(String nameTag) {
-		return "";
+		return " ";
 	}
 	
 	private String getNameClosingTag(String str) {
-		return "";
+		return " ";
 	}
 	
 	private String generateClosingEscapeTag(String nameTag) {
-		return "";
+		return " ";
 	}
 	
 	private String getContentBetweenTags(String str){
-		return "";
+		return " ";
 	}
 	
 }

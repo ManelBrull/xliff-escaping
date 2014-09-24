@@ -1,5 +1,10 @@
 package com.mabrupi;
 
+import static org.junit.Assert.fail;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +14,7 @@ import com.mabrupi.parser.XLIFFwithHTML;
 public class XLIFFwithHTMLTest {
 
 	XLIFFwithHTML parser;
+	
 	
 	@Before
 	public void initialize(){
@@ -29,19 +35,38 @@ public class XLIFFwithHTMLTest {
 		String result = parser.parse(toParse);
 		Assert.assertEquals("Single source without tags",
 				toParse,
-				result);
+				result.toString());
 	}
 	
 	@Test
 	public void testGetNameOpeningTagSimple() {
+		String nameMethod = "getNameOpeningTag";
+		String toParse = "<source>Hello world</source>";
 		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertNotNull("Empty return value", returnValue);
+			Assert.assertEquals(
+					"Opening tag simple: source || " + returnValue.toString(),
+					"source",
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
 	}
+	/**
 	
 	@Test
 	public void testGetNameOpeningTagComplex() {
 		
 	}
-/**	
+	
 	@Test
 	public void testSingleTag1(){
 		String toParse = "<source>I'm <b>really</b> sure about this.</source>";
