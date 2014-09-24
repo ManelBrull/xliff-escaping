@@ -542,9 +542,7 @@ public class XLIFFwithHTMLTest {
 				
 				+ "about this.</source>";
 		
-		System.out.println("Expected: " + expected);
 		String result = parser.parse(toParse);
-		System.out.println("result: " + result);
 		
 		Assert.assertEquals("Source with html b tag",
 				expected,

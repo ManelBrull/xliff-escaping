@@ -33,6 +33,9 @@ public class XLIFFwithHTML {
 		int iniTagPosIndex = toEscape.indexOf("<");
 		if(iniTagPosIndex == -1) return toEscape;
 		
+		if(isTagFollowedByClosingTag(toEscape)){
+			
+		}
 		if(doRecursion(toEscape)){
 			System.out.println("I do recursion with: " + toEscape);
 			String escaped = parseBlock(getNestedTag(toEscape));
@@ -72,7 +75,7 @@ public class XLIFFwithHTML {
 	 * @return
 	 */
 	private boolean isTagFollowedByClosingTag(String str){
-		return false;
+		return isClosingTag(getNameSecondTag(str));
 	}
 	
 	private String getNestedTag(String str){
@@ -101,6 +104,25 @@ public class XLIFFwithHTML {
 		int iniPos = str.indexOf("<")+1;
 		int finPos = str.indexOf(">");
 		return str.substring(iniPos, finPos);
+	}
+	
+	private String getNameSecondTag(String str){
+		int finPos = str.indexOf(">")+1;
+		String removedFirstTag = str.substring(finPos);
+		int iniPos = removedFirstTag.indexOf("<")+1;
+		finPos = removedFirstTag.indexOf(">");
+		return removedFirstTag.substring(iniPos, finPos);
+	}
+	/**
+	 * get the results of the getName, so the input should be:
+	 * nameTag
+	 * /nameTag
+	 * @param tag
+	 * @return
+	 */
+	private boolean isClosingTag(String tag){
+		if(tag.startsWith("/")) return true;
+		return false;
 	}
 	
 	private String generateOpeningEscapeTag(String nameTag) {
