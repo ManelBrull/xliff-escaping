@@ -33,15 +33,18 @@ public class XLIFFwithHTML {
 		int iniTagPosIndex = toEscape.indexOf("<");
 		if(iniTagPosIndex == -1) return toEscape;
 		
-		if(continueRecursion(toEscape)){
+		if(doRecursion(toEscape)){
+			System.out.println("I do recursion with: " + toEscape);
 			parseBlock(getNestedTag(toEscape));
+		} else {
+			System.out.println("I don't do recursion with: " + toEscape);
+			return createEscapeTags(toEscape);
 		}
-		// here it comes the cange of the tag		
 		
 		return toEscape;
 	}
 	
-	private boolean continueRecursion(String str) {
+	private boolean doRecursion(String str) {
 		int firstTagIniPos = str.indexOf(">");
 		int firstTagEndPos = str.lastIndexOf("</");
 		
@@ -62,6 +65,34 @@ public class XLIFFwithHTML {
 		return str.substring(nestedTagIniPos, nestedTagEndPos);
 	}
 	
+	private String createEscapeTags(String str){
+		if(!getNameOpeningTag(str).equals(getNameClosingTag(str)))
+			return "error parsing in: " + str + ";;";
+		StringBuffer result = new StringBuffer();
+		result.append(generateOpeningEscapeTag(getNameOpeningTag(str)));
+		result.append(getContentBetweenTags(str));
+		result.append(generateClosingEscapeTag(getNameClosingTag(str)));
+		return result.toString();
+	}
 	
+	private String getNameOpeningTag(String str){
+		return "";
+	}
+	
+	private String generateOpeningEscapeTag(String nameTag) {
+		return "";
+	}
+	
+	private String getNameClosingTag(String str) {
+		return "";
+	}
+	
+	private String generateClosingEscapeTag(String nameTag) {
+		return "";
+	}
+	
+	private String getContentBetweenTags(String str){
+		return "";
+	}
 	
 }
