@@ -34,6 +34,7 @@ public class XLIFFwithHTML {
 		if(iniTagPosIndex == -1) return toEscape;
 		
 		if(isTagFollowedByClosingTag(toEscape)){
+			//I solve the first problem and continue with the rest
 			
 		}
 		if(doRecursion(toEscape)){
@@ -76,6 +77,18 @@ public class XLIFFwithHTML {
 	 */
 	private boolean isTagFollowedByClosingTag(String str){
 		return isClosingTag(getNameSecondTag(str));
+	}
+	
+	private String leftHalf(String str){
+		int finPosFirstTag = str.indexOf(">")+1;
+		int finPosSecondTag = str.indexOf(">", finPosFirstTag)+1;
+		return str.substring(0, finPosSecondTag);
+	}
+	
+	private String rightHalf(String str){
+		int finPosFirstTag = str.indexOf(">")+1;
+		int finPosSecondTag = str.indexOf(">", finPosFirstTag)+1;
+		return str.substring(finPosSecondTag);
 	}
 	
 	private String getNestedTag(String str){

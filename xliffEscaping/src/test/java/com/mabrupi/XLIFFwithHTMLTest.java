@@ -1,7 +1,5 @@
 package com.mabrupi;
 
-import static org.junit.Assert.fail;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -517,6 +515,68 @@ public class XLIFFwithHTMLTest {
 			Assert.fail("cannot invoke declared method: " + nameMethod);
 		}
 	
+	}
+	
+	@Test
+	public void testLeftHalf() {
+		String nameMethod = "leftHalf";
+		String toParse = "<b> left </b> <b> right </b>";
+		String expectedResult="<b> left </b>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
+	
+	@Test
+	public void testRightHalf() {
+		String nameMethod = "rightHalf";
+		String toParse = "<b> left </b> <b> right </b>";
+		String expectedResult=" <b> right </b>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
+	
+	@Test
+	public void testRightHalfComplex() {
+		String nameMethod = "rightHalf";
+		String toParse = "<b> left </b>";
+		String expectedResult="";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertTrue(
+					returnValue.isEmpty());
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
 	}
 	
 	@Test
