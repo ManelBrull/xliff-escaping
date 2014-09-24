@@ -190,7 +190,50 @@ public class XLIFFwithHTMLTest {
 		}
 	}
 	
+	@Test
+	public void testGenerateOpeningEscapeTagSimple() {
+		String nameMethod = "generateOpeningEscapeTag";
+		String toParse = "b";
+		String expectedResult="<bpt id=\"0\" rid=\"0\">&lt;" + toParse +
+				"&gt;</bpt>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Opening escape",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
 	
+	@Test
+	public void testGenerateOpeningEscapeTagSource() {
+		String nameMethod = "generateOpeningEscapeTag";
+		String toParse = "source";
+		String expectedResult="<source>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Opening escape",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
 	/**
 	@Test
 	public void testSingleTag1(){
