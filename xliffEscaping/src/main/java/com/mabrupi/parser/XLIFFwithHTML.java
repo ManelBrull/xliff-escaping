@@ -88,7 +88,9 @@ public class XLIFFwithHTML {
 	}
 	
 	private String getNameClosingTag(String str) {
-		return " ";
+		int iniPos = str.lastIndexOf("</")+2;
+		int finPos = str.lastIndexOf(">");
+		return str.substring(iniPos, finPos);
 	}
 	
 	private String generateClosingEscapeTag(String nameTag) {
