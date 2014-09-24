@@ -98,8 +98,10 @@ public class XLIFFwithHTML {
 	}
 	
 	private String getContentBetweenTags(String str){
-		
-		return "something";
+		int iniPos = str.indexOf(">") + 1;
+		int finPos = str.indexOf("</");
+		if(iniPos == finPos) return "";
+		return str.substring(iniPos, finPos);
 	}
 	
 }

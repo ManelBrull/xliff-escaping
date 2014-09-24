@@ -181,9 +181,7 @@ public class XLIFFwithHTMLTest {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
 			String returnValue = (String) method.invoke(parser, toParse);
-			Assert.assertNull(
-					"Content problems",
-					returnValue);
+			Assert.assertTrue(returnValue.isEmpty());
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
 		} catch (IllegalAccessException | IllegalArgumentException
