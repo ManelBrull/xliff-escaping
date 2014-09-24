@@ -38,14 +38,10 @@ public class XLIFFwithHTML {
 			else {
 				return result+parseBlock(rightHalf(toEscape));
 			}
-			//I solve the first problem and continue with the rest
 		} else {
-			if(doRecursion(toEscape)){
-				String escaped = parseBlock(getNestedTag(toEscape));
-				return createEscapeTags(substituteNested(toEscape, escaped));
-			} else {
-				return createEscapeTags(toEscape);
-			}
+			String escaped = parseBlock(getNestedTag(toEscape));
+			return createEscapeTags(substituteNested(toEscape, escaped));
+			 
 		}
 	}
 	
@@ -58,16 +54,6 @@ public class XLIFFwithHTML {
 		result.append(escaped);
 		result.append(toEscape.substring(finPos));
 		return result.toString();
-	}
-	
-	private boolean doRecursion(String str) {
-		int firstTagIniPos = str.indexOf(">");
-		int firstTagEndPos = str.lastIndexOf("</");
-		
-		int nestedTagIniPos = str.indexOf("<", firstTagIniPos);
-		if(nestedTagIniPos == firstTagEndPos)
-			return false;
-		return true;
 	}
 	
 	/**<ul> 

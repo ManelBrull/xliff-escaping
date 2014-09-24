@@ -66,52 +66,6 @@ public class XLIFFwithHTMLPrivateTest {
 	}
 	
 	@Test
-	public void testDoRecursionSimple() {
-		String nameMethod = "doRecursion";
-		String toParse = "<source>Hello <b>nested tag</b> world</source>";
-		boolean resultExpected = true;
-		
-		try {
-			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
-			method.setAccessible(true);
-			boolean returnValue = (boolean) method.invoke(parser, toParse);
-			Assert.assertEquals(
-					"Do recursion",
-					resultExpected,
-					returnValue);
-		} catch (NoSuchMethodException | SecurityException e) {
-			Assert.fail("cannot get declared method: " + nameMethod);
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			Assert.fail("cannot invoke declared method: " + nameMethod);
-		}
-	
-	}
-	
-	@Test
-	public void testDoRecursionComplex() {
-		String nameMethod = "doRecursion";
-		String toParse = "<source>Hello world</source>";
-		boolean resultExpected = false;
-		
-		try {
-			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
-			method.setAccessible(true);
-			boolean returnValue = (boolean) method.invoke(parser, toParse);
-			Assert.assertEquals(
-					"Do recursion",
-					resultExpected,
-					returnValue);
-		} catch (NoSuchMethodException | SecurityException e) {
-			Assert.fail("cannot get declared method: " + nameMethod);
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			Assert.fail("cannot invoke declared method: " + nameMethod);
-		}
-	
-	}
-	
-	@Test
 	public void testGetNameOpeningTagSimple() {
 		String nameMethod = "getNameOpeningTag";
 		String toParse = "<source>Hello world</source>";
