@@ -449,7 +449,30 @@ public class XLIFFwithHTMLTest {
 	
 	}
 	
+	@Test
+	public void testSubstituteNested() {
+		String nameMethod = "substituteNested";
+		String toEscape = "<source>I'm <b>really</b> sure about this.</source>";
+		String escaped = "<bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>really<ept id=\"1\" rid=\"0\">&lt;/b&gt;</ept>";
+		String expectedResult = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>really<ept id=\"1\" rid=\"0\">"+
+				"&lt;/b&gt;</ept> sure about this.</source>";
+				
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toEscape, escaped);
+			Assert.assertEquals(
+					"Substitue nested problems",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
 	
+	}
 	
 	@Test
 	public void testSingleTag1(){
