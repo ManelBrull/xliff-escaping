@@ -450,12 +450,12 @@ public class XLIFFwithHTMLTest {
 	}
 	
 	
-	/**
+	
 	@Test
 	public void testSingleTag1(){
 		String toParse = "<source>I'm <b>really</b> sure about this.</source>";
 		String expected  = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>"
-				+ "really<ept id\"1\" rid=\"0\">&lt;/b&gt;</ept>"
+				+ "really<ept id=\"1\" rid=\"0\">&lt;/b&gt;</ept>"
 				+ " sure about this.</source>";
 		
 		System.out.println("Expected: " + expected);
@@ -466,6 +466,6 @@ public class XLIFFwithHTMLTest {
 				expected,
 				result);
 	}
-	**/
+	
 	
 }

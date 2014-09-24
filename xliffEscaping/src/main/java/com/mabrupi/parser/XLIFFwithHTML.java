@@ -35,14 +35,23 @@ public class XLIFFwithHTML {
 		
 		if(doRecursion(toEscape)){
 			System.out.println("I do recursion with: " + toEscape);
-			parseBlock(getNestedTag(toEscape));
-			
+			String escaped = parseBlock(getNestedTag(toEscape));
+			return substituteNested(toEscape, escaped);
 		} else {
 			System.out.println("I don't do recursion with: " + toEscape);
 			return createEscapeTags(toEscape);
 		}
-		
-		return toEscape;
+	}
+	
+	private String substituteNested(String toEscape, String escaped){
+		StringBuffer result = new StringBuffer();
+		String toSubstitute = getNestedTag(toEscape);
+		int iniPos = toEscape.indexOf(toSubstitute);
+		int finPos = iniPos + toSubstitute.length();
+		result.append(toEscape.substring(0, iniPos));
+		result.append(escaped);
+		result.append(toEscape.substring(finPos));
+		return result.toString();
 	}
 	
 	private boolean doRecursion(String str) {
@@ -97,7 +106,6 @@ public class XLIFFwithHTML {
 	private String getNameClosingTag(String str) {
 		int iniPos = str.lastIndexOf("</")+"</".length();
 		int finPos = str.lastIndexOf(">");
-		System.out.println("Closing tag name: "+ str.substring(iniPos, finPos));
 		return str.substring(iniPos, finPos);
 	}
 	
