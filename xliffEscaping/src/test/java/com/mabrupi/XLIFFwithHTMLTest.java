@@ -33,6 +33,16 @@ public class XLIFFwithHTMLTest {
 	}
 	
 	@Test
+	public void testGetNameOpeningTagSimple() {
+		
+	}
+	
+	@Test
+	public void testGetNameOpeningTagComplex() {
+		
+	}
+/**	
+	@Test
 	public void testSingleTag1(){
 		String toParse = "<source>I'm <b>really</b> sure about this.</source>";
 		String expected  = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>"
@@ -43,4 +53,5 @@ public class XLIFFwithHTMLTest {
 				expected,
 				result);
 	}
+	**/
 }
