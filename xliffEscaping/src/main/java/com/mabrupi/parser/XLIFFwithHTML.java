@@ -32,6 +32,7 @@ public class XLIFFwithHTML {
 		if(iniTagPosIndex == -1) return toEscape;
 
 		if(isTagFollowedByClosingTag(toEscape)){
+			//we apply divide & conquer
 			String result = createEscapeTags(leftHalf(toEscape));
 			if(rightHalf(toEscape).isEmpty()) 
 				return result;
@@ -39,6 +40,7 @@ public class XLIFFwithHTML {
 				return result+parseBlock(rightHalf(toEscape));
 			}
 		} else {
+			// we apply backward recursivity
 			String escaped = parseBlock(getNestedTag(toEscape));
 			return createEscapeTags(substituteNested(toEscape, escaped));
 			 
@@ -88,7 +90,6 @@ public class XLIFFwithHTML {
 		
 		return str.substring(nestedTagIniPos, nestedTagEndPos);
 	}
-	
 	
 	
 	private String createEscapeTags(String str){

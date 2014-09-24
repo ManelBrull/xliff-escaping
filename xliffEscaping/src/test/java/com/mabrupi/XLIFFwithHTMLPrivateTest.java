@@ -39,7 +39,6 @@ public class XLIFFwithHTMLPrivateTest {
 				| InvocationTargetException e) {
 			Assert.fail("cannot invoke declared method: " + nameMethod);
 		}
-	
 	}
 	
 	@Test
@@ -69,7 +68,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetNameOpeningTagSimple() {
 		String nameMethod = "getNameOpeningTag";
 		String toParse = "<source>Hello world</source>";
-		
+		String resultExpected = "source";
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
@@ -77,7 +76,7 @@ public class XLIFFwithHTMLPrivateTest {
 			Assert.assertNotNull("Empty return value", returnValue);
 			Assert.assertEquals(
 					"Opening tag simple: source || " + returnValue.toString(),
-					"source",
+					resultExpected,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -93,7 +92,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetNameOpeningTagComplex() {
 		String nameMethod = "getNameOpeningTag";
 		String toParse = "Something to make it more complex <source>Hello world</source>";
-		
+		String resultExpected = "source";
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
@@ -101,7 +100,7 @@ public class XLIFFwithHTMLPrivateTest {
 			Assert.assertNotNull("Empty return value", returnValue);
 			Assert.assertEquals(
 					"Opening tag simple: source || " + returnValue.toString(),
-					"source",
+					resultExpected,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -115,7 +114,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetNameClosingTagSimple() {
 		String nameMethod = "getNameClosingTag";
 		String toParse = "<source>Hello world</source>";
-		
+		String resultExpected = "source";
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
@@ -123,7 +122,7 @@ public class XLIFFwithHTMLPrivateTest {
 			Assert.assertNotNull("Empty return value", returnValue);
 			Assert.assertEquals(
 					"Closing tag simple: source || " + returnValue.toString(),
-					"source",
+					resultExpected,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -138,7 +137,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetNameClosingTagComplex() {
 		String nameMethod = "getNameClosingTag";
 		String toParse = "Something to make it more complex <source>Hello world</source> Something to make it more complex ";
-		
+		String resultExpected = "source";
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
@@ -146,7 +145,7 @@ public class XLIFFwithHTMLPrivateTest {
 			Assert.assertNotNull("Empty return value", returnValue);
 			Assert.assertEquals(
 					"Closing tag simple: source || " + returnValue.toString(),
-					"source",
+					resultExpected,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -160,6 +159,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetContentBetweenTagsSimple() {
 		String nameMethod = "getContentBetweenTags";
 		String toParse = "<source>Hello world</source>";
+		String expectedResult = "Hello world"; 
 		
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
@@ -167,7 +167,7 @@ public class XLIFFwithHTMLPrivateTest {
 			String returnValue = (String) method.invoke(parser, toParse);
 			Assert.assertEquals(
 					"Content problems",
-					"Hello world",
+					expectedResult,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -182,14 +182,14 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetContentBetweenTagsComplex() {
 		String nameMethod = "getContentBetweenTags";
 		String toParse = "Something to make it more complex <source>Hello world</source> Something to make it more complex ";
-		
+		String resultExpected = "Hello world";
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
 			String returnValue = (String) method.invoke(parser, toParse);
 			Assert.assertEquals(
 					"Content problems",
-					"Hello world",
+					resultExpected,
 					returnValue);
 		} catch (NoSuchMethodException | SecurityException e) {
 			Assert.fail("cannot get declared method: " + nameMethod);
@@ -203,7 +203,7 @@ public class XLIFFwithHTMLPrivateTest {
 	public void testGetContentBetweenTagsEmpty() {
 		String nameMethod = "getContentBetweenTags";
 		String toParse = "Something to make it more complex <source></source> Something to make it more complex ";
-		
+		boolean resultExpected = true;
 		try {
 			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
 			method.setAccessible(true);
@@ -264,10 +264,10 @@ public class XLIFFwithHTMLPrivateTest {
 	
 	@Test
 	public void testGenerateClosingEscapeTagSimple() {
+		// first we invoke generateOpeningTag. This is not the test
 		String opNameMethod = "generateOpeningEscapeTag";
 		String toParse = "b";
 		
-		// first we invoke generateOpeningTag
 		try {
 			Method method = parser.getClass().getDeclaredMethod(opNameMethod, String.class);
 			method.setAccessible(true);
@@ -301,10 +301,10 @@ public class XLIFFwithHTMLPrivateTest {
 	
 	@Test
 	public void testGenerateClosingEscapeTagSource() {
+		// first we invoke generateOpeningTag, this is not the test
 		String opNameMethod = "generateOpeningEscapeTag";
 		String toParse = "source";
 		
-		// first we invoke generateOpeningTag
 		try {
 			Method method = parser.getClass().getDeclaredMethod(opNameMethod, String.class);
 			method.setAccessible(true);
