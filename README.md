@@ -36,5 +36,15 @@ that different translation tools are interoperable </p>
 
 <h3>Technical</h3>
 <p> The solution consists on a combination of backward recursivity and divide and conquer.</p>
-* We use backward recursivity to look for nested tags and escape them.
-* We use divide and conquer in case elements are at the same level.
+* We use backward recursivity to look for nested tags and escape them. We look for the deepest tag and we convert it. Then we apply the change to the others tags recursively.
+* We use divide and conquer in case elements are at the same level. We take the first opening and closing tag and solve them. Then we move to the rest recursively.
+<p> This logic is implemented in the method parseBlock of the class XLIFFwithHTML</p>
+
+<p> The id attribute for bpt and ept tags are generated from 0..n. The first escaped tag will have the 0 id and the n escaped tag will have the n id. It's the same for each rid attribute, 0 for the first pair and n for the n pair. </p>
+
+<h3>Extras</h3>
+* The code works for arbitrary html paired tags.
+
+<h3> Future Work </h3>
+* This code only works if the first String contains a source tag. That has been done in case a String could have multiple source tags, just in case it is not needed to translate everything. However, this code only works if there are only one pair of source tags.
+* This code heavily relies on tags syntax like ">", "<", "</*>", etc. If one of that symbols is misplaced, like point something doing "-->" or "<--" the code will crash. 
