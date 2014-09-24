@@ -39,6 +39,52 @@ public class XLIFFwithHTMLTest {
 	}
 	
 	@Test
+	public void testGetNestedTagSimple() {
+		String nameMethod = "getNestedTag";
+		String toParse = "<source>Hello <b>nested tag</b> world</source>";
+		String resultExpected = "<b>nested tag</b>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Nested tag",
+					resultExpected,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
+	
+	@Test
+	public void testGetNestedTagComplex() {
+		String nameMethod = "getNestedTag";
+		String toParse = "<source>Hello <b></b> world</source>";
+		String resultExpected = "<b></b>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Nested tag",
+					resultExpected,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
+	
+	@Test
 	public void testGetNameOpeningTagSimple() {
 		String nameMethod = "getNameOpeningTag";
 		String toParse = "<source>Hello world</source>";
@@ -308,17 +354,24 @@ public class XLIFFwithHTMLTest {
 			Assert.fail("cannot invoke declared method: " + nameMethod);
 		}
 	}
+	
+	
 	/**
 	@Test
 	public void testSingleTag1(){
 		String toParse = "<source>I'm <b>really</b> sure about this.</source>";
 		String expected  = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>"
-				+ "really>ept id\"1\" rid=\"0\">&lt;/b&gt;</ept>"
+				+ "really<ept id\"1\" rid=\"0\">&lt;/b&gt;</ept>"
 				+ " sure about this.</source>";
+		
+		System.out.println("Expected: " + expected);
 		String result = parser.parse(toParse);
+		System.out.println("result: " + result);
+		
 		Assert.assertEquals("Source with html b tag",
 				expected,
 				result);
 	}
 	**/
+	
 }
