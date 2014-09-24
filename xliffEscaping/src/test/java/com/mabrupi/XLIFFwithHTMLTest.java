@@ -473,6 +473,51 @@ public class XLIFFwithHTMLTest {
 		}
 	
 	}
+	@Test
+	public void testIsTagFollowedByClosingTagSimple(){
+		String nameMethod = "isTagFollowedByClosingTag";
+		String toParse = "<b>nested tag</b>";
+		boolean resultExpected = true;
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			boolean returnValue = (boolean) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"check if the next tag is the same and is to close",
+					resultExpected,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
+	
+	@Test
+	public void testIsTagFollowedByClosingTagComplex(){
+		String nameMethod = "isTagFollowedByClosingTag";
+		String toParse = "<b>nested <b> nested tag </b> tag</b>";
+		boolean resultExpected = false;
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			boolean returnValue = (boolean) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"check if the next tag is the same and is to close",
+					resultExpected,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
 	
 	@Test
 	public void testSingleTag(){
@@ -521,4 +566,6 @@ public class XLIFFwithHTMLTest {
 				expected,
 				result);
 	}
+	
+	
 }

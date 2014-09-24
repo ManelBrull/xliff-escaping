@@ -64,6 +64,16 @@ public class XLIFFwithHTML {
 			return false;
 		return true;
 	}
+	/**<ul> 
+	 * 	<li>input: <b> something </b> --> True </li>
+	 *  <li>input: <b> something <b> --> False </li>
+	 * </ul>
+	 * @param str
+	 * @return
+	 */
+	private boolean isTagFollowedByClosingTag(String str){
+		return false;
+	}
 	
 	private String getNestedTag(String str){
 		int firstTagIniPos = str.indexOf(">")+1;
