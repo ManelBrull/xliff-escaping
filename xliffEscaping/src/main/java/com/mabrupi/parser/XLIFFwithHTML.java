@@ -32,18 +32,24 @@ public class XLIFFwithHTML {
 	private String parseBlock(String toEscape){
 		int iniTagPosIndex = toEscape.indexOf("<");
 		if(iniTagPosIndex == -1) return toEscape;
-		
+
 		if(isTagFollowedByClosingTag(toEscape)){
+			String result = createEscapeTags(leftHalf(toEscape));
+			if(rightHalf(toEscape).isEmpty()) 
+				return result;
+			else {
+				return result+parseBlock(rightHalf(toEscape));
+			}
 			//I solve the first problem and continue with the rest
-			
-		}
-		if(doRecursion(toEscape)){
-			System.out.println("I do recursion with: " + toEscape);
-			String escaped = parseBlock(getNestedTag(toEscape));
-			return createEscapeTags(substituteNested(toEscape, escaped));
 		} else {
-			System.out.println("I don't do recursion with: " + toEscape);
-			return createEscapeTags(toEscape);
+			if(doRecursion(toEscape)){
+				System.out.println("I do recursion with: " + toEscape);
+				String escaped = parseBlock(getNestedTag(toEscape));
+				return createEscapeTags(substituteNested(toEscape, escaped));
+			} else {
+				System.out.println("I don't do recursion with: " + toEscape);
+				return createEscapeTags(toEscape);
+			}
 		}
 	}
 	
