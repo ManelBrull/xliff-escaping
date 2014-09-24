@@ -6,9 +6,7 @@ public class XLIFFwithHTML {
 	int id;
 	int rid;
 	
-	public XLIFFwithHTML(){
-		
-	}
+	public XLIFFwithHTML(){}
 	
 	public String parse(String parse){
 		if(parse == null) return "";
@@ -43,11 +41,9 @@ public class XLIFFwithHTML {
 			//I solve the first problem and continue with the rest
 		} else {
 			if(doRecursion(toEscape)){
-				System.out.println("I do recursion with: " + toEscape);
 				String escaped = parseBlock(getNestedTag(toEscape));
 				return createEscapeTags(substituteNested(toEscape, escaped));
 			} else {
-				System.out.println("I don't do recursion with: " + toEscape);
 				return createEscapeTags(toEscape);
 			}
 		}
@@ -69,11 +65,11 @@ public class XLIFFwithHTML {
 		int firstTagEndPos = str.lastIndexOf("</");
 		
 		int nestedTagIniPos = str.indexOf("<", firstTagIniPos);
-		int nestedTagEndPos = str.lastIndexOf(">", firstTagEndPos);
 		if(nestedTagIniPos == firstTagEndPos)
 			return false;
 		return true;
 	}
+	
 	/**<ul> 
 	 * 	<li>input: <b> something </b> --> True </li>
 	 *  <li>input: <b> something <b> --> False </li>
@@ -133,9 +129,9 @@ public class XLIFFwithHTML {
 		return removedFirstTag.substring(iniPos, finPos);
 	}
 	/**
-	 * get the results of the getName, so the input should be:
-	 * nameTag
-	 * /nameTag
+	 * get the results from the getName, so the input should be (without quotes):
+	 * "nameTag"
+	 * "/nameTag"
 	 * @param tag
 	 * @return
 	 */
