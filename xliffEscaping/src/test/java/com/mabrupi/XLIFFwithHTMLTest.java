@@ -506,5 +506,19 @@ public class XLIFFwithHTMLTest {
 				result);
 	}
 	
-	
+	@Test
+	public void testMultipleTag(){
+		String toParse = "<source>I'm <b>really</b> <b>really</b> sure about this.</source>";
+		String expected  = "<source>I'm <bpt id=\"0\" rid=\"0\">&lt;b&gt;</bpt>"
+				+ "really"
+				+ "<ept id=\"1\" rid=\"0\">&lt;/b&gt;</ept>"
+				+ " <bpt id=\"2\" rid=\"1\">&lt;b&gt;</bpt>"
+				+ "really"
+				+ "<ept id=\"3\" rid=\"1\">&lt;/b&gt;</ept>"
+				+ " sure about this.</source>";
+		String result = parser.parse(toParse);
+		Assert.assertEquals("Source with html b tag",
+				expected,
+				result);
+	}
 }
