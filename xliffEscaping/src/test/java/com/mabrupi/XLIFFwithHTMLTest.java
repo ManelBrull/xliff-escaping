@@ -234,6 +234,80 @@ public class XLIFFwithHTMLTest {
 			Assert.fail("cannot invoke declared method: " + nameMethod);
 		}
 	}
+	
+	@Test
+	public void testGenerateClosingEscapeTagSimple() {
+		String opNameMethod = "generateOpeningEscapeTag";
+		String toParse = "b";
+		
+		// first we invoke generateOpeningTag
+		try {
+			Method method = parser.getClass().getDeclaredMethod(opNameMethod, String.class);
+			method.setAccessible(true);
+			method.invoke(parser, toParse);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + opNameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + opNameMethod);
+		}
+		
+		//here starts our real test
+		String nameMethod = "generateClosingEscapeTag";
+		String expectedResult="<ept id=\"1\" rid=\"0\">&lt;/" + toParse +
+				"&gt;</ept>";
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Closing escape",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
+	
+	@Test
+	public void testGenerateClosingEscapeTagSource() {
+		String opNameMethod = "generateOpeningEscapeTag";
+		String toParse = "source";
+		
+		// first we invoke generateOpeningTag
+		try {
+			Method method = parser.getClass().getDeclaredMethod(opNameMethod, String.class);
+			method.setAccessible(true);
+			method.invoke(parser, toParse);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + opNameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + opNameMethod);
+		}
+		
+		//Here starts our test
+		String nameMethod = "generateClosingEscapeTag";
+		String expectedResult="</source>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Closing escape",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
 	/**
 	@Test
 	public void testSingleTag1(){
