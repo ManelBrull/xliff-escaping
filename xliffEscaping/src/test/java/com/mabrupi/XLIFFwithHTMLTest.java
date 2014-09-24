@@ -423,6 +423,32 @@ public class XLIFFwithHTMLTest {
 	
 	}
 	
+	@Test
+	public void testParseBlockComplex() {
+		String nameMethod = "parseBlock";
+		String toParse = "<b>Hello world</b>";
+		String expectedResult = 
+				"<bpt id=\"0\" rid=\"0\">&lt;" + "b" + "&gt;</bpt>" +
+				"Hello world" + 
+				"<ept id=\"1\" rid=\"0\">&lt;/" + "b" + "&gt;</ept>";
+				
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"parse block problems",
+					expectedResult,
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
+	
 	
 	/**
 	@Test
