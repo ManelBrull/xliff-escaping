@@ -1,21 +1,23 @@
 <h1> Xliff-escaping </h1>
-* * * 
+
 <h3> Introduction <h3>
 <p> XLIFF is an XML format for communication with trnaslation agencies.</p>
 <p> We can put all the bits of texts that we want translated into an xliff document and send it to the translation agency.
-They can read it with their tools, put in the trnasalted texts, and send us back another xliff document. A standart format ensures
-that different translation tools are interoperable </p>
+They can read it with their tools, put in the trnasalted texts, and send us back another xliff document. A standart format ensures that different translation tools are interoperable </p>
 <p> Inside an xliff document, the translatable text are sent inside <source> elements. So if we want them to transalte "Hello world", the xliff document will contain: </p>
 
     <source>Hello world\</source> 
+    
     
 <p> Often, we are translating web pages, and the translatable texts include some html elements, like </p>
 
     I'm <b> really</b> sure about this.
     
+    
 <p> If we just put it into a source element, we'd get</p>
 
     <source>I'm <b> really</b> sure about this.</source>
+    
     
 <p>That is wrong. We cannot hace html elements inside a source tag because they would break the xliff format and also confuse the human trnaslator who does not know html </p>
 
@@ -38,6 +40,7 @@ that different translation tools are interoperable </p>
 <p> The solution consists on a combination of backward recursivity and divide and conquer.</p>
 * We use backward recursivity to look for nested tags and escape them. We look for the deepest tag and we convert it. Then we apply the change to the others tags recursively.
 * We use divide and conquer in case elements are at the same level. We take the first opening and closing tag and solve them. Then we move to the rest recursively.
+
 <p> This logic is implemented in the method parseBlock of the class XLIFFwithHTML</p>
 
 <p> The id attribute for bpt and ept tags are generated from 0..n. The first escaped tag will have the 0 id and the n escaped tag will have the n id. It's the same for each rid attribute, 0 for the first pair and n for the n pair. </p>
