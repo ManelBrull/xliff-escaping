@@ -60,13 +60,31 @@ public class XLIFFwithHTMLTest {
 		}
 	
 	}
-	/**
+	
 	
 	@Test
 	public void testGetNameOpeningTagComplex() {
+		String nameMethod = "getNameOpeningTag";
+		String toParse = "Something to make it more complex <source>Hello world</source>";
 		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertNotNull("Empty return value", returnValue);
+			Assert.assertEquals(
+					"Opening tag simple: source || " + returnValue.toString(),
+					"source",
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
 	}
 	
+	/**
 	@Test
 	public void testSingleTag1(){
 		String toParse = "<source>I'm <b>really</b> sure about this.</source>";
