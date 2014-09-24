@@ -100,7 +100,14 @@ public class XLIFFwithHTML {
 	}
 	
 	private String generateClosingEscapeTag(String nameTag) {
-		return " ";
+		if(nameTag.equals("source")) return "</source>";
+		StringBuffer result = new StringBuffer();
+		result.append("<ept id=\"").append(String.valueOf(id)).append("\"");
+		id++;
+		result.append(" rid=\"").append(String.valueOf(rid)).append("\">");
+		rid++;
+		result.append("&lt;/").append(nameTag).append("&gt;</ept>");
+		return result.toString();
 	}
 	
 	private String getContentBetweenTags(String str){
