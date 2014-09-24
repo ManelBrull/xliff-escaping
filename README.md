@@ -1,14 +1,14 @@
 <h1> Xliff-escaping </h1>
 
 <h3> Introduction </h3>
- XLIFF is an XML format for communication with translation agencies.
-We can put all the bits of texts that we want translated into an xliff document and send it to the translation agency.
-They can read it with their tools, put in the trnasalted texts, and send us back another xliff document. A standart format ensures that different translation tools are interoperable.
-Inside an xliff document, the translatable text are sent inside source elements.
+XLIFF is a XML format for communication with translation agencies.
+We can put all the bits of texts that we want translated into a xliff document and send it to the translation agency.
+They can read it with their tools, put in the transalted texts, and send us back another xliff document. A standart format ensures that different translation tools are interoperable.
+Inside a xliff document, the translatable text are sent inside source elements.
 
-Often, we are translating web pages, and the translatable texts include some html elements. The problem is if we find html tags inside a source element. We cannot hace html elements inside a source tag because they would break the xliff format and also confuse the human trnaslator who does not know html.
+Often, we are translating web pages, and the translatable texts include some html elements. The problem is if we find html tags inside a source element. We cannot have html elements inside a source tag because they would break the xliff format and also confuse the human trnaslator who does not know html.
 
-This code recieves a String and returns a String. The received String is a small text that may contain some html elements and a source tag to translate. The returned stringshould be the same, with the html elements properly escaped for inclusion in an xliff source element.
+This code recieves a String and returns a String. The received String is a small text that may contain some html elements and a source tag to translate. The returned string should be the same, with the html elements properly escaped for inclusion in a xliff source element.
 
 * We assume that the text is a correct html snippet with source tags.
 * All openings tags have matching closing tag.
@@ -30,7 +30,7 @@ The solution consists on a combination of backward recursivity and divide and co
 
 This logic is implemented in the method parseBlock of the class XLIFFwithHTML.
 
-The id attribute for bpt and ept tags are generated from 0..n. The first escaped tag will have the 0 id and the n escaped tag will have the n id. It's the same for each rid attribute, 0 for the first pair and n for the n pair.
+The id attribute for bpt and ept tags are generated from 0..n. The first escaped tag will have the 0 id and the n escaped tag will have the n id. It's the same for each rid attribute, 0 for the first pair and n for the n pair. That ensures they are unique.
 
 <h3>Extras</h3>
 * The code works for arbitrary html paired tags.
