@@ -129,6 +129,70 @@ public class XLIFFwithHTMLTest {
 		}
 	}
 	
+	@Test
+	public void testGetContentBetweenTagsSimple() {
+		String nameMethod = "getContentBetweenTags";
+		String toParse = "<source>Hello world</source>";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Content problems",
+					"Hello world",
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	
+	}
+	
+	@Test
+	public void testGetContentBetweenTagsComplex() {
+		String nameMethod = "getContentBetweenTags";
+		String toParse = "Something to make it more complex <source>Hello world</source> Something to make it more complex ";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertEquals(
+					"Content problems",
+					"Hello world",
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
+	
+	@Test
+	public void testGetContentBetweenTagsEmpty() {
+		String nameMethod = "getContentBetweenTags";
+		String toParse = "Something to make it more complex <source></source> Something to make it more complex ";
+		
+		try {
+			Method method = parser.getClass().getDeclaredMethod(nameMethod, String.class);
+			method.setAccessible(true);
+			String returnValue = (String) method.invoke(parser, toParse);
+			Assert.assertNull(
+					"Content problems",
+					returnValue);
+		} catch (NoSuchMethodException | SecurityException e) {
+			Assert.fail("cannot get declared method: " + nameMethod);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			Assert.fail("cannot invoke declared method: " + nameMethod);
+		}
+	}
+	
+	
 	/**
 	@Test
 	public void testSingleTag1(){

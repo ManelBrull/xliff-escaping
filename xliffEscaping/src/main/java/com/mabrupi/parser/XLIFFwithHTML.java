@@ -98,7 +98,8 @@ public class XLIFFwithHTML {
 	}
 	
 	private String getContentBetweenTags(String str){
-		return " ";
+		
+		return "something";
 	}
 	
 }
