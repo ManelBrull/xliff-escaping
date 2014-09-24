@@ -78,7 +78,9 @@ public class XLIFFwithHTML {
 	}
 	
 	private String getNameOpeningTag(String str){
-		return "";
+		int iniPos = str.indexOf("<")+1;
+		int finPos = str.indexOf(">");
+		return str.substring(iniPos, finPos);
 	}
 	
 	private String generateOpeningEscapeTag(String nameTag) {
