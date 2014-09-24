@@ -1,5 +1,6 @@
 package com.mabrupi.parser;
 
+
 public class XLIFFwithHTML {
 	
 	int id;
@@ -18,17 +19,49 @@ public class XLIFFwithHTML {
 	
 	private String getParseResult(String toParse){
 		StringBuffer result = new StringBuffer();
-		//We assume an alone source block
+		//we assume only one source block
 		int iniPosSource = toParse.indexOf("<source>"); 
-		int finPosSource = toParse.indexOf("</source>");
+		int finPosSource = toParse.lastIndexOf("</source>")+"</source>".length();
 		result.append(toParse.substring(0, iniPosSource));
-		result.append(escapeHTML(toParse.substring(iniPosSource, finPosSource)));
+		result.append(parseBlock(
+				toParse.substring(iniPosSource, finPosSource)));
 		result.append(toParse.substring(finPosSource));
 		return result.toString();
 	}
 	
-	private String escapeHTML(String toEscape){
+	private String parseBlock(String toEscape){
+		int iniTagPosIndex = toEscape.indexOf("<");
+		if(iniTagPosIndex == -1) return toEscape;
+		
+		if(continueRecursion(toEscape)){
+			parseBlock(getNestedTag(toEscape));
+		}
+		// here it comes the cange of the tag		
+		
 		return toEscape;
 	}
+	
+	private boolean continueRecursion(String str) {
+		int firstTagIniPos = str.indexOf(">");
+		int firstTagEndPos = str.lastIndexOf("</");
+		
+		int nestedTagIniPos = str.indexOf("<", firstTagIniPos);
+		int nestedTagEndPos = str.lastIndexOf(">", firstTagEndPos);
+		if(nestedTagIniPos == firstTagEndPos)
+			return false;
+		return true;
+	}
+	
+	private String getNestedTag(String str){
+		int firstTagIniPos = str.indexOf(">");
+		int firstTagEndPos = str.lastIndexOf("</");
+		
+		int nestedTagIniPos = str.indexOf("<", firstTagIniPos);
+		int nestedTagEndPos = str.lastIndexOf(">", firstTagEndPos);
+		
+		return str.substring(nestedTagIniPos, nestedTagEndPos);
+	}
+	
+	
 	
 }
