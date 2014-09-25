@@ -30,6 +30,10 @@ The solution consists on a combination of backward recursivity and divide and co
 
 This logic is implemented in the method parseBlock of the class XLIFFwithHTML.
 
+I used this approach because it seemed the simpler way between the other attacks I considered:
+* Create an array of tags and iterate it to look for a pair of opening and closing tag, escape it, and create the array again, excluding bpt ept tags. I discarded it because it's very unefficient.
+* Use a xml parser. This was discarded because the input data is not a well-formed xml.
+
 The id attribute for bpt and ept tags are generated from 0..n. The first escaped tag will have the 0 id and the n escaped tag will have the n id. It's the same for each rid attribute, 0 for the first pair and n for the n pair. That ensures they are unique.
 
 <h3>Extras</h3>
