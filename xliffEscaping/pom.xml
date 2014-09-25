@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.mabrupi</groupId>
   <artifactId>xliffEscaping</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Xliff escaping</name>
   <description>Programming exercise: xliff escaping</description>
   
